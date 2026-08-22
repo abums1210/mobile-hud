@@ -48,7 +48,7 @@ class MobileTexDictionary {
     void AddToStorage();
 public:
     MobileTexDictionary();
-    void Init(char *path);
+    void Init(const char *path);
     RwTexture *GetTexture(unsigned int id = 0);
 };
 

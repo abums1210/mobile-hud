@@ -4,7 +4,6 @@
 #include "CTxdStore.h"
 #include "CMenuManager.h"
 #include "MobileTextures.h"
-#include "MobileText.h"
 #include "MobileMenuSystem.h"
 #include "Utility.h"
 

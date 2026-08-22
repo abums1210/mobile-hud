@@ -37,7 +37,7 @@ MobileTexDictionary::MobileTexDictionary() {
     m_nLastUsedTime = 0;
 }
 
-void MobileTexDictionary::Init(char *path) {
+void MobileTexDictionary::Init(const char *path) {
     strcpy(m_szPath, path);
     m_pRwTexDictionary = nullptr;
     m_bInitialised = true;
@@ -78,7 +78,11 @@ MobileTxdStorage &MobileTxdStorage::Instance() {
 }
 
 void MobileTextures::Setup() {
-    m_menuSliderTxd.Init(PLUGIN_PATH("MobileHud\\menu_slider.txd"));
-    m_aSplashesTxd.Init(PLUGIN_PATH("MobileHud\\mobilescs.txd"));
-    m_nBackgroundSpriteTxd.Init(PLUGIN_PATH("MobileHud\\menu_background.txd"));
+    const char *sliderPath, *splashesPath, *backgroundPath;
+    sliderPath = "MobileHud\\menu_slider.txd";
+    splashesPath = "MobileHud\\mobilescs.txd";
+    backgroundPath = "MobileHud\\menu_background.txd";
+    m_menuSliderTxd.Init(PLUGIN_PATH(sliderPath));
+    m_aSplashesTxd.Init(PLUGIN_PATH(splashesPath));
+    m_nBackgroundSpriteTxd.Init(PLUGIN_PATH(backgroundPath));
 }

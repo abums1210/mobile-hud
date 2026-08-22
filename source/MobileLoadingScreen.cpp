@@ -1,4 +1,5 @@
 #include "MobileLoadingScreen.h"
+#include "MobileText.h"
 
 using namespace plugin;
 
@@ -15,8 +16,7 @@ void MobileLoadingScreen::InstallPatches() {
 
 float fPosX = 3000;
 float fPosY = 0;
-char *pText;
-char *pText2;
+const char *pText, *pText2;
 int logoAlpha = 0;
 int backgroundAlpha = 0;
 

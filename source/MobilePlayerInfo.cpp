@@ -57,7 +57,7 @@ void MobilePlayerInfo::InstallPatches() {
 
 void MobilePlayerInfo::MyDrawWeaponIcon(CPed *player, int, int, float alpha) {
     RwRenderStateSet(rwRENDERSTATETEXTUREFILTER, reinterpret_cast<void *>(rwFILTERLINEAR));
-    int weapModel = CWeaponInfo::GetWeaponInfo((eWeaponType)player->m_aWeapons[player->m_nActiveWeaponSlot].m_nType, 1)->m_nModelId1;
+    int weapModel = CWeaponInfo::GetWeaponInfo((eWeaponType)player->m_aWeapons[player->m_nSelectedWepSlot].m_eWeaponType, 1)->m_nModelId;
     if (weapModel <= 0) {
         float baseY = 0.0f;
         if (player == CWorld::Players[1].m_pPed)
@@ -87,14 +87,14 @@ void MobilePlayerInfo::MyDrawWeaponIcon(CPed *player, int, int, float alpha) {
 }
 
 void MobilePlayerInfo::MyDrawWeaponAmmo(CPed *player, int, int, float alpha) {
-    unsigned int ammoInClip = player->m_aWeapons[player->m_nActiveWeaponSlot].m_nAmmoInClip;
-    unsigned int totalAmmo = player->m_aWeapons[player->m_nActiveWeaponSlot].m_nTotalAmmo;
-    eWeaponType wepType = (eWeaponType)player->m_aWeapons[player->m_nActiveWeaponSlot].m_nType;
+    unsigned int ammoInClip = player->m_aWeapons[player->m_nSelectedWepSlot].m_nAmmoInClip;
+    unsigned int totalAmmo = player->m_aWeapons[player->m_nSelectedWepSlot].m_nAmmoTotal;
+    eWeaponType wepType = (eWeaponType)player->m_aWeapons[player->m_nSelectedWepSlot].m_eWeaponType;
     unsigned short maxAmmoInClip = CWeaponInfo::GetWeaponInfo(wepType, player->GetWeaponSkill())->m_nAmmoClip;
     if (maxAmmoInClip <= 1 || maxAmmoInClip >= 1000)
         sprintf(gString, "%d", totalAmmo);
     else {
-        if (wepType == WEAPON_FTHROWER) {
+        if (wepType == WEAPONTYPE_FTHROWER) {
             unsigned int total = 9999;
             if ((totalAmmo - ammoInClip) / 10 <= 9999)
                 total = (totalAmmo - ammoInClip) / 10;
@@ -117,10 +117,10 @@ void MobilePlayerInfo::MyDrawWeaponAmmo(CPed *player, int, int, float alpha) {
     CFont::SetFontStyle(FONT_SUBTITLES);
     if ((totalAmmo - ammoInClip) >= 9999
         || CDarkel::FrenzyOnGoing()
-        || wepType == WEAPON_UNARMED
-        || wepType == WEAPON_DETONATOR
-        || wepType >= WEAPON_DILDO1 && wepType < WEAPON_GRENADE
-        || wepType == WEAPON_PARACHUTE
+        || wepType == WEAPONTYPE_UNARMED
+        || wepType == WEAPONTYPE_DETONATOR
+        || wepType >= WEAPONTYPE_DILDO1 && wepType < WEAPONTYPE_GRENADE
+        || wepType == WEAPONTYPE_PARACHUTE
         || CWeaponInfo::GetWeaponInfo(wepType, 1)->m_nWeaponFire == 5
         || CWeaponInfo::GetWeaponInfo(wepType, 1)->m_nSlot <= 1)
     {
